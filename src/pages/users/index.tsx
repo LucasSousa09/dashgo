@@ -1,5 +1,3 @@
-import { useQuery } from 'react-query'
-
 import { Header } from '../../components/Header'
 import { Sidebar } from '../../components/Sidebar'
 import { Pagination } from '../../components/Pagination'
@@ -11,10 +9,13 @@ import { Box, Flex, Icon ,Table, Thead ,Heading, Button, Tr, Th, Checkbox, Tbody
 
 import { RiAddLine, RiPencilLine } from 'react-icons/ri'
 import { useUsers } from '../../services/hooks/useUsers'
+import { useState } from 'react'
 
 export default function UserList(){
-    //Salva os dados em cache para que a aplicação não precise ficar acessando o backend tão frequentemente
-    const {data, isLoading, isFetching, error} = useUsers()
+    const [page, setPage] = useState(1)
+
+    //React-query = Salva os dados em cache para que a aplicação não precise ficar acessando o backend tão frequentemente
+    const {data, isLoading, isFetching, error} = useUsers(page)
 
     const isWideVersion = useBreakpointValue({
         base: false,
@@ -78,7 +79,7 @@ export default function UserList(){
                                                     </Thead>
                                                     <Tbody>
                                                         {
-                                                            data?.map(user => {
+                                                            data?.users.map(user => {
                                                                 return (
                                                                     <Tr key={user.id}>
                                                                         <Td px={["4","4","6"]}>
@@ -108,9 +109,9 @@ export default function UserList(){
                                                 </Table>
 
                                                 <Pagination 
-                                                    totalCountOfRegisters={200}
-                                                    currentPage={5}
-                                                    onPageChange={( ) => {}}
+                                                    totalCountOfRegisters={data?.totalCount || 0}
+                                                    currentPage={page}
+                                                    onPageChange={setPage}
                                                 />
                                             </>
                                         )
