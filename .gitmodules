@@ -1,3 +1,0 @@
-[submodule "dashgo-auth-backend"]
-	path = dashgo-auth-backend
-	url = https://github.com/rocketseat-education/ignite-reactjs-auth-backend
