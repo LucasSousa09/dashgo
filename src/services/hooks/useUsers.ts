@@ -14,7 +14,7 @@ interface GetUserResponse {
 }
 
 export async function getUsers(page: number): Promise<GetUserResponse> {
-    const { data, headers } = await api.get<GetUserResponse>('users',{
+    const { data, headers } = await api.get<GetUserResponse>('users', {
         params: {
             page,
         }
@@ -35,9 +35,11 @@ export async function getUsers(page: number): Promise<GetUserResponse> {
       }
     })
 
-    return{ users, totalCount}
+    return { users, totalCount}
   }
 
 export function useUsers(page: number){
-    return useQuery(['users-list', page], () => getUsers(page) , {  staleTime: 1000 * 60 * 10 })
+    return useQuery(['users-list', page], () => getUsers(page), {
+        staleTime: 1000 * 60 * 1
+    }) 
 }

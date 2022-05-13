@@ -8,12 +8,16 @@ import { Link, Spinner, Text, useBreakpointValue } from '@chakra-ui/react'
 import { Box, Flex, Icon ,Table, Thead ,Heading, Button, Tr, Th, Checkbox, Tbody, Td } from '@chakra-ui/react'
 
 import { RiAddLine, RiPencilLine } from 'react-icons/ri'
-import { useUsers } from '../../services/hooks/useUsers'
-import { useState } from 'react'
+import { getUsers, useUsers } from '../../services/hooks/useUsers'
+import { useEffect, useState } from 'react'
 import { queryClient } from '../../services/queryClient'
 import { api } from '../../services/api'
+import { GetServerSideProps, GetStaticProps } from 'next'
+import { UseQueryOptions } from 'react-query'
 
 export default function UserList(){
+
+    
     const [page, setPage] = useState(1)
 
     //React-query = Salva os dados em cache para que a aplicação não precise ficar acessando o backend tão frequentemente
