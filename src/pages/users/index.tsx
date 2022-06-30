@@ -8,12 +8,11 @@ import { Link, Spinner, Text, useBreakpointValue } from '@chakra-ui/react'
 import { Box, Flex, Icon ,Table, Thead ,Heading, Button, Tr, Th, Checkbox, Tbody, Td } from '@chakra-ui/react'
 
 import { RiAddLine, RiPencilLine } from 'react-icons/ri'
-import { getUsers, useUsers } from '../../services/hooks/useUsers'
-import { useEffect, useState } from 'react'
+import { useUsers } from '../../services/hooks/useUsers'
+import { useState } from 'react'
 import { queryClient } from '../../services/queryClient'
 import { api } from '../../services/api'
-import { GetServerSideProps, GetStaticProps } from 'next'
-import { UseQueryOptions } from 'react-query'
+
 
 export default function UserList(){
 
@@ -107,7 +106,7 @@ export default function UserList(){
                                                                             </Link>
                                                                             <Text fontSize="sm" color="gray.300"> {user.email} </Text>
                                                                         </Td>
-                                                                        {isWideVersion && <Td>{user.createdAt}</Td>}
+                                                                        {isWideVersion && <Td>{user.created_at}</Td>}
                                                                         <Td>
                                                                             <Button
                                                                                 as='a'

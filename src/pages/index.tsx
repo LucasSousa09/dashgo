@@ -1,4 +1,4 @@
-import { FieldValues, SubmitHandler, useForm } from 'react-hook-form'
+import { SubmitHandler, useForm } from 'react-hook-form'
 import { Flex, Button, Stack } from '@chakra-ui/react'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
@@ -6,23 +6,27 @@ import { Input } from '../components/Form/Input'
 
 import type { NextPage } from 'next'
 
+interface SignInFormData{
+  email: string,
+  password: string
+}
+
+
 const signInFormSchema = yup.object().shape({
     email: yup.string().required('E-mail obrigatório').email('E-mail inválido'),
     password: yup.string().required('Senha obrigatória'),
   })
 
 const SignIn: NextPage = () => {
-  const { register, handleSubmit, formState } = useForm({
+  const { register, handleSubmit, formState } = useForm<SignInFormData>({
     resolver: yupResolver(signInFormSchema)
   })
 
- const handleSignIn: SubmitHandler<FieldValues> = (values, event) => {
+ const handleSignIn: SubmitHandler<SignInFormData> = (values, event) => {
   console.log(values)
  }
 
   const { errors } = formState
-
-  console.log(errors)
 
   return (
     <Flex 
